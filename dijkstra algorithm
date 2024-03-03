@@ -1,0 +1,37 @@
+import heapq
+
+def dijkstra(graph, start, end):
+
+pq = []
+
+heapq.heappush(pq, (0, start))
+
+cost = {start: 0}
+
+parent = {start: None}
+
+visited = set()
+
+while pq:
+
+current_cost, current_node = heapq.heappop(pq)
+
+if current_node == end:
+    return cost, parent
+
+if current_node in visited:
+    continue
+
+
+neighbors = graph[current_node]
+
+for neighbor, edge_cost in neighbors.items():
+  
+    new_cost = current_cost + edge_cost
+
+    if new_cost < cost.get(neighbor, float('inf')):
+        cost[neighbor] = new_cost
+        parent[neighbor] = current_node
+        # push the neighbor onto the priority queue with the updated cost as the priority
+        heapq.heappush(pq, (new_cost, neighbor))
+return None
