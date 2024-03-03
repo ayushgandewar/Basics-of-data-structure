@@ -1,0 +1,41 @@
+class Node:
+def init(self, data=None):
+self.data = data
+self.next = None
+
+class CircularLinkedList:
+def init(self):
+self.head = None
+
+def add(self, data):
+new_node = Node(data)
+if self.head is None:
+self.head = new_node
+new_node.next = self.head
+else:
+current = self.head
+while current.next != self.head:
+current = current.next
+current.next = new_node
+new_node.next = self.head
+
+def delete(self, data):
+if self.head is None:
+return
+if self.head.next == self.head:
+if self.head.data == data:
+self.head = None
+return
+if self.head.data == data:
+current = self.head
+while current.next != self.head:
+current = current.next
+current.next = self.head.next
+self.head = self.head.next
+return
+current = self.head
+while current.next != self.head:
+if current.next.data == data:
+current.next = current.next.next
+return
+current = current.next
