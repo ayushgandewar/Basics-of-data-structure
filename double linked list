@@ -1,0 +1,108 @@
+class Node:
+def init(self, data=None):
+self.data = data
+self.next = None
+self.prev = None
+
+class DoublyLinkedList:
+def init(self):
+self.head = None
+
+def insert_at_beginning(self, data):
+new_node = Node(data)
+if self.head is None:
+self.head = new_node
+return
+new_node.next = self.head
+self.head.prev = new_node
+self.head = new_node
+
+def insert_at_ending(self, data):
+new_node = Node(data)
+if self.head is None:
+self.head = new_node
+return
+current = self.head
+while current.next is not None:
+current = current.next
+current.next = new_node
+new_node.prev = current
+
+def insert_at_position(self, data, position):
+new_node = Node(data)
+if position == 0:
+self.insert_at_beginning(data)
+return
+current = self.head
+current_position = 0
+while current is not None and current_position < position - 1:
+current = current.next
+current_position += 1
+if current is None:
+return
+new_node.next = current.next
+new_node.prev = current
+if current.next is not None:
+current.next.prev = new_node
+current.next = new_node
+
+deletion
+def delete_at_beginning(self):
+if self.head is None:
+return
+self.head = self.head.next
+if self.head is not None:
+self.head.prev = None
+
+def delete_at_ending(self):
+if self.head is None:
+return
+if self.head.next is None:
+self.head = None
+return
+current = self.head
+while current.next.next is not None:
+current = current.next
+current.next = None
+
+def delete_at_position(self, position):
+if self.head is None:
+return
+if position == 0:
+self.head = self.head.next
+if self.head is not None:
+self.head.prev = None
+return
+current = self.head
+current_position = 0
+while current is not None and current_position < position - 1:
+current = current.next
+current_position += 1
+if current is None or current.next is None:
+return
+current.next = current.next.next
+if current.next is not None:
+current.next.prev = current
+
+Search, Count the Number of Nodes and Display
+def search(self, data):
+current = self.head
+while current is not None:
+if current.data == data:
+return True
+current = current.next
+return False
+
+def count(self):
+current = self.head
+count = 0
+while current is not None:
+count += 1
+current = current.next
+return count
+
+def display(self):
+current = self.head
+while current is not None:
+print(current.data)
+current = current.next
